@@ -26,4 +26,40 @@ public class Map {
     {
         return new Point(x, y);
     }
+
+    public boolean isPointValid(MapObject object)
+    {
+        return this.isPointValid(object.getPoint());
+    }
+
+    public boolean isPointValid(Point point)
+    {
+        return point.getX() >= 0
+                && point.getX() <= width
+                && point.getY() >= 0
+                && point.getY() <= height;
+    }
+
+    public Point validatePoint(Point point)
+    {
+        if (isPointValid(point)) {
+            return point;
+        }
+
+        int x = point.getX();
+        if (x < 0) {
+            x = 0;
+        } else if (x > width) {
+            x = width;
+        }
+
+        int y = point.getY();
+        if (y < 0) {
+            y = 0;
+        } else if (y > height) {
+            y = height;
+        }
+
+        return this.createPoint(x, y);
+    }
 }

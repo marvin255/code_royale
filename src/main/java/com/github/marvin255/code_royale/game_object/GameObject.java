@@ -1,27 +1,14 @@
 package com.github.marvin255.code_royale.game_object;
 
+import com.github.marvin255.code_royale.map.Circle;
 import com.github.marvin255.code_royale.map.Point;
-import com.github.marvin255.code_royale.map.MapObject;
 
-abstract public class GameObject implements MapObject {
-    private final Point point;
-    private final int radius;
+abstract public class GameObject extends Circle {
     private Owner owner;
 
     GameObject (Point point, int radius, Owner owner) {
-        this.point = point;
-        this.radius = radius;
+        super(point, radius);
         this.owner = owner;
-    }
-
-    @Override
-    public Point getPoint() {
-        return point;
-    }
-
-    @Override
-    public int getRadius() {
-        return radius;
     }
 
     public Owner getOwner() {

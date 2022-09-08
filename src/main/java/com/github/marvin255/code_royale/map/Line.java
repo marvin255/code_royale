@@ -1,12 +1,12 @@
 package com.github.marvin255.code_royale.map;
 
-class Line
+public class Line
 {
     private final double a;
     private final double b;
     private final double c;
 
-    Line(double a, double b, double c)
+    public Line(double a, double b, double c)
     {
         this.a = a;
         this.b = b;

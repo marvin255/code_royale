@@ -36,23 +36,9 @@ public class RunawayIfDanger implements Strategy {
             return StrategyResult.none();
         }
 
-        return null;
-    }
-
-    private Point findRunawayTargetPoint(Unit queen, UnitCollection units, StructureCollection structures)
-    {
-        List<Structure> towers = structures.getFriendlyByType(StructureType.TOWER);
-        GameObject tower = geometryCalculator.findClosestObject(queen, towers);
-        if (tower != null) {
-            return tower.getPoint();
-        }
-
-        List<Unit> alliedArchers = units.getFriendlyType(UnitType.ARCHER);
-        Unit archer = geometryCalculator.findClosestObject(queen, alliedArchers);
-        if (archer != null) {
-            return archer.getPoint();
-        }
-
-
+        return StrategyResult.move(
+                StrategyCoefficient.HIGHEST,
+                pathConstructor.runaway(queen, dangerousUnits)
+        );
     }
 }

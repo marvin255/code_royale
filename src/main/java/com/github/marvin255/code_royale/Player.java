@@ -19,8 +19,8 @@ import java.util.Scanner;
 class Player {
     public static void main(String[] args) {
         final Map map = new Map(1920, 1000);
-        final GeometryCalculator geometryCalculator = new GeometryCalculator(map);
-        final PathConstructor pathConstructor = new PathConstructor(geometryCalculator);
+        final GeometryCalculator geometryCalculator = new GeometryCalculator();
+        final PathConstructor pathConstructor = new PathConstructor(map, geometryCalculator);
 
         final DecisionMaker queenDecisionMaker = new DecisionMaker(
                 new RunawayIfDanger(geometryCalculator, pathConstructor)
