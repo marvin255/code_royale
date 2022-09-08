@@ -1,7 +1,5 @@
 package com.github.marvin255.code_royale.map;
 
-import com.github.marvin255.code_royale.game_object.Owner;
-
 public class Circle implements MapObject
 {
     private final Point point;

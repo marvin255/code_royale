@@ -41,11 +41,11 @@ public class UnitCollection extends ArrayList<Unit>  {
         if (byOwner != null) {
             List<Unit> byType = byOwner.get(type);
             if (byType != null) {
-                return List.copyOf(byType);
+                return byType;
             }
         }
 
-        return List.of();
+        return new ArrayList<>();
     }
 
     private void mapCollection()

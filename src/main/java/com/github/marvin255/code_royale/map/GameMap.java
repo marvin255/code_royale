@@ -1,10 +1,11 @@
 package com.github.marvin255.code_royale.map;
 
-public class Map {
+public class GameMap
+{
     private final int width;
     private final int height;
 
-    public Map (int width, int height) {
+    public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
     }

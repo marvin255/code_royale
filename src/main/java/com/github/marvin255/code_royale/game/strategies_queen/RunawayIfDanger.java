@@ -3,8 +3,6 @@ package com.github.marvin255.code_royale.game.strategies_queen;
 import com.github.marvin255.code_royale.game.*;
 import com.github.marvin255.code_royale.game_object.*;
 import com.github.marvin255.code_royale.map.GeometryCalculator;
-import com.github.marvin255.code_royale.map.MapObject;
-import com.github.marvin255.code_royale.map.Point;
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class RunawayIfDanger implements Strategy {
 
     public RunawayIfDanger(GeometryCalculator geometryCalculator, PathConstructor pathConstructor)
     {
-        this(geometryCalculator, pathConstructor, 100);
+        this(geometryCalculator, pathConstructor, 400);
     }
 
     @Override

@@ -8,7 +8,7 @@ public class GeometryCalculator {
     public Point findAverageCenter(List<? extends MapObject> objects)
     {
         int x = 0, y = 0;
-        for (var object : objects) {
+        for (MapObject object : objects) {
             x += object.getPoint().getX();
             y += object.getPoint().getY();
         }

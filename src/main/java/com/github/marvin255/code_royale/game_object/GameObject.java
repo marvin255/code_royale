@@ -3,7 +3,7 @@ package com.github.marvin255.code_royale.game_object;
 import com.github.marvin255.code_royale.map.Circle;
 import com.github.marvin255.code_royale.map.Point;
 
-abstract public class GameObject extends Circle {
+public abstract class GameObject extends Circle {
     private Owner owner;
 
     GameObject (Point point, int radius, Owner owner) {

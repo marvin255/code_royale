@@ -8,7 +8,7 @@ public class DecisionMaker {
     private final List<Strategy> strategies;
 
     public DecisionMaker(Strategy... strategies) {
-        this(List.of(strategies));
+        this(new ArrayList<>(Arrays.asList(strategies)));
     }
 
     public DecisionMaker(List<Strategy> strategies)

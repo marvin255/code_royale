@@ -2,12 +2,11 @@ package com.github.marvin255.code_royale;
 
 import com.github.marvin255.code_royale.game.DecisionMaker;
 import com.github.marvin255.code_royale.game.PathConstructor;
-import com.github.marvin255.code_royale.game.Strategy;
 import com.github.marvin255.code_royale.game.Treasury;
 import com.github.marvin255.code_royale.game.strategies_queen.RunawayIfDanger;
 import com.github.marvin255.code_royale.game_object.*;
 import com.github.marvin255.code_royale.map.GeometryCalculator;
-import com.github.marvin255.code_royale.map.Map;
+import com.github.marvin255.code_royale.map.GameMap;
 import com.github.marvin255.code_royale.map.Point;
 
 import java.util.Scanner;
@@ -18,9 +17,9 @@ import java.util.Scanner;
  **/
 class Player {
     public static void main(String[] args) {
-        final Map map = new Map(1920, 1000);
+        final GameMap gameMap = new GameMap(1920, 1000);
         final GeometryCalculator geometryCalculator = new GeometryCalculator();
-        final PathConstructor pathConstructor = new PathConstructor(map, geometryCalculator);
+        final PathConstructor pathConstructor = new PathConstructor(gameMap, geometryCalculator);
 
         final DecisionMaker queenDecisionMaker = new DecisionMaker(
                 new RunawayIfDanger(geometryCalculator, pathConstructor)
@@ -39,7 +38,7 @@ class Player {
             int x = in.nextInt();
             int y = in.nextInt();
             int radius = in.nextInt();
-            Point point = map.createPoint(x, y);
+            Point point = gameMap.createPoint(x, y);
             structures.add(StructureFactory.create(siteId, point, radius));
         }
 
@@ -74,7 +73,7 @@ class Player {
                 int owner = in.nextInt();
                 int unitType = in.nextInt(); // -1 = QUEEN, 0 = KNIGHT, 1 = ARCHER
                 int health = in.nextInt();
-                Point point = map.createPoint(x, y);
+                Point point = gameMap.createPoint(x, y);
                 units.add(UnitFactory.create(point, owner, unitType, health));
             }
 
@@ -83,7 +82,8 @@ class Player {
             // First line: A valid queen action
             // Second line: A set of training instructions
             System.out.println(queenDecisionMaker.makeDecision(units, structures, treasury));
-            System.out.println(trainingDecisionMaker.makeDecision(units, structures, treasury));
+            //System.out.println(trainingDecisionMaker.makeDecision(units, structures, treasury));
+            System.out.println("TRAIN");
         }
     }
 }
