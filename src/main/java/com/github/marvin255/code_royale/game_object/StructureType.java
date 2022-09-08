@@ -1,6 +1,6 @@
 package com.github.marvin255.code_royale.game_object;
 
-enum StructureType {
+public enum StructureType {
     NO_STRUCTURE,
     GOLDMINE,
     TOWER,

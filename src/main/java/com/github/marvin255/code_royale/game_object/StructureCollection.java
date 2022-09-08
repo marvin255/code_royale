@@ -53,11 +53,11 @@ public class StructureCollection extends ArrayList<Structure> {
         if (byOwner != null) {
             List<Structure> byType = byOwner.get(type);
             if (byType != null) {
-                return byType;
+                return List.copyOf(byType);
             }
         }
 
-        return new ArrayList<>();
+        return List.of();
     }
 
     private void mapCollection()

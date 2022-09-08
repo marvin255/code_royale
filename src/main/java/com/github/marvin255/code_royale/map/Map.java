@@ -16,4 +16,14 @@ public class Map {
     public int getHeight() {
         return height;
     }
+
+    public Point createPoint(int x, int y)
+    {
+        return new Point(x, y);
+    }
+
+    public Point createPoint(double x, double y)
+    {
+        return new Point(x, y);
+    }
 }

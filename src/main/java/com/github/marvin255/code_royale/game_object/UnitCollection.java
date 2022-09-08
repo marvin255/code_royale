@@ -18,13 +18,9 @@ public class UnitCollection extends ArrayList<Unit>  {
         isCollectionMapped = false;
     }
 
-    public Unit getFriendlyQueen() throws UnitNotFoundException
+    public Unit getFriendlyQueen()
     {
-        Unit queen = getListByOwnerAndType(Owner.FRIENDLY, UnitType.QUEEN).get(0);
-        if (queen == null) {
-            throw new UnitNotFoundException();
-        }
-        return queen;
+        return getListByOwnerAndType(Owner.FRIENDLY, UnitType.QUEEN).get(0);
     }
 
     public List<Unit> getFriendlyType(UnitType type)
@@ -45,11 +41,11 @@ public class UnitCollection extends ArrayList<Unit>  {
         if (byOwner != null) {
             List<Unit> byType = byOwner.get(type);
             if (byType != null) {
-                return byType;
+                return List.copyOf(byType);
             }
         }
 
-        return new ArrayList<>();
+        return List.of();
     }
 
     private void mapCollection()

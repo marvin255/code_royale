@@ -1,6 +1,16 @@
 package com.github.marvin255.code_royale;
 
+import com.github.marvin255.code_royale.game.DecisionMaker;
+import com.github.marvin255.code_royale.game.PathConstructor;
+import com.github.marvin255.code_royale.game.Strategy;
+import com.github.marvin255.code_royale.game.Treasury;
+import com.github.marvin255.code_royale.game.strategies_queen.RunawayIfDanger;
+import com.github.marvin255.code_royale.game_object.*;
+import com.github.marvin255.code_royale.map.GeometryCalculator;
 import com.github.marvin255.code_royale.map.Map;
+import com.github.marvin255.code_royale.map.Point;
+
+import java.util.Scanner;
 
 /**
  * Auto-generated code below aims at helping you parse
@@ -9,10 +19,18 @@ import com.github.marvin255.code_royale.map.Map;
 class Player {
     public static void main(String[] args) {
         final Map map = new Map(1920, 1000);
-        /*
+        final GeometryCalculator geometryCalculator = new GeometryCalculator(map);
+        final PathConstructor pathConstructor = new PathConstructor(geometryCalculator);
+
+        final DecisionMaker queenDecisionMaker = new DecisionMaker(
+                new RunawayIfDanger(geometryCalculator, pathConstructor)
+        );
+
+        final DecisionMaker trainingDecisionMaker = new DecisionMaker();
+
         final Treasury treasury = new Treasury();
-        final StructureList structures = new StructureList();
-        final UnitList units = new UnitList();
+        final StructureCollection structures = new StructureCollection();
+        final UnitCollection units = new UnitCollection();
 
         Scanner in = new Scanner(System.in);
         int numSites = in.nextInt();
@@ -21,31 +39,31 @@ class Player {
             int x = in.nextInt();
             int y = in.nextInt();
             int radius = in.nextInt();
-            structures.add(StructureFactory.create(siteId, x, y, radius));
-        }*/
+            Point point = map.createPoint(x, y);
+            structures.add(StructureFactory.create(siteId, point, radius));
+        }
 
         // game loop
         while (true) {
-            /*
             int gold = in.nextInt();
             treasury.setGold(gold);
 
             int touchedSite = in.nextInt(); // -1 if none
 
-            structures.clearCalculations();
+            structures.clearMapped();
             for (int i = 0; i < numSites; i++) {
-                int siteId = in.nextInt();
+                int structureId = in.nextInt();
                 int ignore1 = in.nextInt(); // used in future leagues
                 int ignore2 = in.nextInt(); // used in future leagues
                 int structureType = in.nextInt(); // -1 = No structure, 2 = Barracks
                 int owner = in.nextInt(); // -1 = No structure, 0 = Friendly, 1 = Enemy
                 int param1 = in.nextInt();
                 int param2 = in.nextInt();
-                Structure site = structures.byId(siteId);
-                site.setType(StructureTypes.convertInput(structureType, param2));
-                site.setOwner(Owners.convertInput(owner));
-                site.setParam1(param1);
-                site.setParam2(param2);
+                Structure structure = structures.getById(structureId);
+                structure.setType(StructureType.convertInputToEnum(structureType, param2));
+                structure.setOwner(Owner.convertInputToEnum(owner));
+                structure.setParam1(param1);
+                structure.setParam2(param2);
             }
 
             units.clear();
@@ -56,17 +74,16 @@ class Player {
                 int owner = in.nextInt();
                 int unitType = in.nextInt(); // -1 = QUEEN, 0 = KNIGHT, 1 = ARCHER
                 int health = in.nextInt();
-                units.add(UnitFactory.create(x, y, owner, unitType, health));
-            }*/
+                Point point = map.createPoint(x, y);
+                units.add(UnitFactory.create(point, owner, unitType, health));
+            }
 
             // Write an action using System.out.println()
             // To debug: System.err.println("Debug messages...");
-            String[] turn = new String[2];
-
             // First line: A valid queen action
             // Second line: A set of training instructions
-            System.out.println(turn[0]);
-            System.out.println(turn[1]);
+            System.out.println(queenDecisionMaker.makeDecision(units, structures, treasury));
+            System.out.println(trainingDecisionMaker.makeDecision(units, structures, treasury));
         }
     }
 }
