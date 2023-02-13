@@ -14,7 +14,7 @@ public class TrainKnights implements Strategy {
         List<Structure> barracks = structures.getFriendlyByType(StructureType.BARRACKS_KNIGHT);
         boolean canTrain = barracks.size() * UnitType.KNIGHT.getCost() <= treasury.getGold();
 
-        if (canTrain) {
+        if (barracks.size() > 0 && canTrain) {
             return StrategyResult.train(StrategyCoefficient.HIGHT, barracks);
         } else {
             return StrategyResult.noneTrain();
