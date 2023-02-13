@@ -1,12 +1,19 @@
 package com.github.marvin255.code_royale.game_object;
 
 public enum StructureType {
-    NO_STRUCTURE,
-    GOLDMINE,
-    TOWER,
-    BARRACKS_KNIGHT,
-    BARRACKS_ARCHER,
-    BARRACKS_GIANT;
+    NO_STRUCTURE(""),
+    GOLDMINE("MINE"),
+    TOWER("TOWER"),
+    BARRACKS_KNIGHT("BARRACKS-KNIGHT"),
+    BARRACKS_ARCHER("BARRACKS-ARCHER"),
+    BARRACKS_GIANT("BARRACKS-GIANT");
+
+    private final String buildCommand;
+
+    StructureType(String buildCommand)
+    {
+        this.buildCommand = buildCommand;
+    }
 
     public static StructureType convertInputToEnum(int structureType, int param2)
     {
@@ -25,5 +32,10 @@ public enum StructureType {
         } else {
             throw new RuntimeException();
         }
+    }
+
+    public String getBuildCommand()
+    {
+        return buildCommand;
     }
 }

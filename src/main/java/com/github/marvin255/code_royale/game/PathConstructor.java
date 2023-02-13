@@ -1,7 +1,5 @@
 package com.github.marvin255.code_royale.game;
 
-import com.github.marvin255.code_royale.game_object.Structure;
-import com.github.marvin255.code_royale.game_object.StructureCollection;
 import com.github.marvin255.code_royale.game_object.Unit;
 import com.github.marvin255.code_royale.map.*;
 import com.github.marvin255.code_royale.map.GameMap;
@@ -16,14 +14,6 @@ public class PathConstructor {
     {
         this.gameMap = gameMap;
         this.geometryCalculator = geometryCalculator;
-    }
-
-    public List<Point> createPath(Unit unit, MapObject target, StructureCollection structures)
-    {
-        List<Point> path = new ArrayList<>();
-        List<Structure> objectsOnStraight = geometryCalculator.findObjectsOnStraight(unit, target, structures);
-
-        return path;
     }
 
     public Point runaway(Unit prey, List<Unit> hunters)

@@ -3,7 +3,10 @@ package com.github.marvin255.code_royale;
 import com.github.marvin255.code_royale.game.DecisionMaker;
 import com.github.marvin255.code_royale.game.PathConstructor;
 import com.github.marvin255.code_royale.game.Treasury;
+import com.github.marvin255.code_royale.game.strategies_queen.BuildBarracksKnight;
+import com.github.marvin255.code_royale.game.strategies_queen.IncreaseGoldInput;
 import com.github.marvin255.code_royale.game.strategies_queen.RunawayIfDanger;
+import com.github.marvin255.code_royale.game.strategies_training.TrainKnights;
 import com.github.marvin255.code_royale.game_object.*;
 import com.github.marvin255.code_royale.map.GeometryCalculator;
 import com.github.marvin255.code_royale.map.GameMap;
@@ -22,10 +25,14 @@ class Player {
         final PathConstructor pathConstructor = new PathConstructor(gameMap, geometryCalculator);
 
         final DecisionMaker queenDecisionMaker = new DecisionMaker(
-                new RunawayIfDanger(geometryCalculator, pathConstructor)
+                new RunawayIfDanger(geometryCalculator, pathConstructor),
+                new BuildBarracksKnight(geometryCalculator),
+                new IncreaseGoldInput(geometryCalculator)
         );
 
-        final DecisionMaker trainingDecisionMaker = new DecisionMaker();
+        final DecisionMaker trainingDecisionMaker = new DecisionMaker(
+                new TrainKnights()
+        );
 
         final Treasury treasury = new Treasury();
         final StructureCollection structures = new StructureCollection();
@@ -82,8 +89,7 @@ class Player {
             // First line: A valid queen action
             // Second line: A set of training instructions
             System.out.println(queenDecisionMaker.makeDecision(units, structures, treasury));
-            //System.out.println(trainingDecisionMaker.makeDecision(units, structures, treasury));
-            System.out.println("TRAIN");
+            System.out.println(trainingDecisionMaker.makeDecision(units, structures, treasury));
         }
     }
 }

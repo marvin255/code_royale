@@ -64,6 +64,14 @@ public class Structure extends GameObject {
         return -1;
     }
 
+    public boolean isMaxIncomeReached()
+    {
+        if (type == StructureType.GOLDMINE) {
+            return param1 >= 5;
+        }
+        return true;
+    }
+
     public int getTimeToComplete()
     {
         if (type == StructureType.BARRACKS_ARCHER || type == StructureType.BARRACKS_GIANT || type == StructureType.BARRACKS_KNIGHT) {
